@@ -25,7 +25,13 @@
       var map = plugin.google.maps.Map.getMap(div);
 
       map.on(plugin.google.maps.event.MAP_CLICK, function(latLng) {
-        alert(latLng + " is clicked!");
+        var marker = map.addMarker({
+          position: latLng,
+          title: "Welcome to \n" +
+                 "Cordova GoogleMaps plugin for iOS,Android and Browser!",
+          snippet: "This plugin is awesome!",
+          animation: plugin.google.maps.Animation.BOUNCE
+        });
       });
 
       // If you click the button, do something...
