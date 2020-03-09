@@ -52,12 +52,16 @@
 
       var button = div.getElementsByTagName('button')[0];
       button.addEventListener('click', function() {
-        ble.isConnected("80:FB:F0:8B:7C:BE", connectedSuccess, connectedFailure);
+        ble.connect("80:FB:F0:8B:7C:BE", connectedSuccess, connectedFailure);
       });
 
-      var connectedSuccess = function(connected) {
-        alert("connected to tracker? " + connected);
+      var connectedSuccess = function() {
+        ble.isConnected("80:FB:F0:8B:7C:BE", connectedAlert, connectedFailure);
       };
+
+      var connectedAlert = function(connected) {
+        alert("connected to tracker? " + connected);
+      }
 
       var connectedFailure = function(msg) {
         alert(msg);
