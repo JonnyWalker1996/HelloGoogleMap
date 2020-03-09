@@ -7,6 +7,7 @@
     document.addEventListener("deviceready", function() {
       alert("ready");
       var div = document.getElementById("map_canvas");
+      
 
       // If your app runs this program on browser,
       // you need to set `API_KEY_FOR_BROWSER_RELEASE` and `API_KEY_FOR_BROWSER_DEBUG`
@@ -28,11 +29,7 @@
       map.on(plugin.google.maps.event.MAP_CLICK, function(latLng) {
         map.clear();
         var marker = map.addMarker({
-          position: latLng,
-          title: "Welcome to \n" +
-                 "Cordova GoogleMaps plugin for iOS,Android and Browser!",
-          snippet: "This plugin is awesome!",
-          animation: plugin.google.maps.Animation.BOUNCE
+          position: latLng
         });
       });
 
@@ -56,13 +53,18 @@
 
       var button = div.getElementsByTagName('button')[0];
       button.addEventListener('click', function() {
-        map.clear();
-        map.getMyLocation(onSuccess, onError);
+        ble.bondedDevices(onBondedSuccess, onBondedError);
       });
 
-      // If you click the button, do something...
-      var button = document.getElementById("button");
+      var onBondedSuccess = function(devices) {
+        for (var i = 0; i < devices.length; i++) {
+          alert(devices[i].name);
+        }
+      }
 
+      var onBondedError = function(msg) {
+        alert(JSON.stringify(msg));
+      }
     }, false);
 
     </script>
@@ -81,7 +83,7 @@
     </style>
   </head>
   <body>
-    <h1>Hello, World!</h1>
+    <h2>Where do you want to go?</h2>
     <div id="map_canvas">
       <button id="button">Click me!</button>
     </div>
