@@ -36,24 +36,17 @@
         });
       });
 
+      map.on(plugin.google.maps.event.MAP_READY, function() {
+        map.getMyLocation(onSuccess, onError);
+      });
+
       var onSuccess = function(location) {
-        var msg = ["Current your location:\n",
-          "latitude:" + location.latLng.lat,
-          "longitude:" + location.latLng.lng,
-          "speed:" + location.speed,
-          "time:" + location.time,
-          "bearing:" + location.bearing].join("\n");
-
-
-        var marker = map.addMarker({
-          'position': location.latLng,
-          'title': msg
-        });
         map.animateCamera({
-          target: location.latLng,
-          zoom: 16
-        }, function() {
-          marker.showInfoWindow();
+          target: location,
+          zoom: 17,
+          tilt: 60,
+          bearing: 140,
+          duration: 5000
         });
       };
 
@@ -69,30 +62,6 @@
 
       // If you click the button, do something...
       var button = document.getElementById("button");
-      // button.addEventListener("click", function() {
-
-      //   // Move to the position with animation
-      //   map.animateCamera({
-      //     target: {lat: 37.422359, lng: -122.084344},
-      //     zoom: 17,
-      //     tilt: 60,
-      //     bearing: 140,
-      //     duration: 5000
-      //   });
-
-      //   // Add a maker
-      //   var marker = map.addMarker({
-      //     position: {lat: 37.422359, lng: -122.084344},
-      //     title: "Welcome to \n" +
-      //            "Cordova GoogleMaps plugin for iOS,Android and Browser!",
-      //     snippet: "This plugin is awesome!",
-      //     animation: plugin.google.maps.Animation.BOUNCE
-      //   });
-
-      //   // Show the info window
-      //   marker.showInfoWindow();
-
-      // });
 
     }, false);
 
