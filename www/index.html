@@ -5,6 +5,7 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript">
     document.addEventListener("deviceready", function() {
+      alert("ready");
       var div = document.getElementById("map_canvas");
 
       // If your app runs this program on browser,
@@ -35,32 +36,63 @@
         });
       });
 
+      var onSuccess = function(location) {
+        var msg = ["Current your location:\n",
+          "latitude:" + location.latLng.lat,
+          "longitude:" + location.latLng.lng,
+          "speed:" + location.speed,
+          "time:" + location.time,
+          "bearing:" + location.bearing].join("\n");
+
+
+        var marker = map.addMarker({
+          'position': location.latLng,
+          'title': msg
+        });
+        map.animateCamera({
+          target: location.latLng,
+          zoom: 16
+        }, function() {
+          marker.showInfoWindow();
+        });
+      };
+
+      var onError = function(msg) {
+        alert(JSON.stringify(msg));
+      };
+
+      var button = div.getElementsByTagName('button')[0];
+      button.addEventListener('click', function() {
+        map.clear();
+        map.getMyLocation(onSuccess, onError);
+      });
+
       // If you click the button, do something...
       var button = document.getElementById("button");
-      button.addEventListener("click", function() {
+      // button.addEventListener("click", function() {
 
-        // Move to the position with animation
-        map.animateCamera({
-          target: {lat: 37.422359, lng: -122.084344},
-          zoom: 17,
-          tilt: 60,
-          bearing: 140,
-          duration: 5000
-        });
+      //   // Move to the position with animation
+      //   map.animateCamera({
+      //     target: {lat: 37.422359, lng: -122.084344},
+      //     zoom: 17,
+      //     tilt: 60,
+      //     bearing: 140,
+      //     duration: 5000
+      //   });
 
-        // Add a maker
-        var marker = map.addMarker({
-          position: {lat: 37.422359, lng: -122.084344},
-          title: "Welcome to \n" +
-                 "Cordova GoogleMaps plugin for iOS,Android and Browser!",
-          snippet: "This plugin is awesome!",
-          animation: plugin.google.maps.Animation.BOUNCE
-        });
+      //   // Add a maker
+      //   var marker = map.addMarker({
+      //     position: {lat: 37.422359, lng: -122.084344},
+      //     title: "Welcome to \n" +
+      //            "Cordova GoogleMaps plugin for iOS,Android and Browser!",
+      //     snippet: "This plugin is awesome!",
+      //     animation: plugin.google.maps.Animation.BOUNCE
+      //   });
 
-        // Show the info window
-        marker.showInfoWindow();
+      //   // Show the info window
+      //   marker.showInfoWindow();
 
-      });
+      // });
 
     }, false);
 
