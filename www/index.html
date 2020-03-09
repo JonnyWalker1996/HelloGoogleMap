@@ -52,22 +52,16 @@
 
       var button = div.getElementsByTagName('button')[0];
       button.addEventListener('click', function() {
-        ble.startScan([], function(device) {
-          alert(JSON.stringify(device));
-        }, onBondedError);
+        ble.isConnected("80:FB:F0:8B:7C:BE", connectedSuccess, connectedFailure);
       });
 
-      var onBondedSuccess = function(devices) {
-        alert("success!");
-        for (var i = 0; i < devices.length; i++) {
-          alert(devices[i].name);
-        }
-      }
+      var connectedSuccess = function(connected) {
+        alert("connected to tracker? " + connected);
+      };
 
-      var onBondedError = function(msg) {
-        alert(JSON.stringify(msg));
+      var connectedFailure = function(msg) {
+        alert(msg);
       }
-    }, false);
 
     </script>
     <style type="text/css">
