@@ -19,7 +19,7 @@
       // you can comment out this code.
       plugin.google.maps.environment.setEnv({
         'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyAu4x8hRAtj92sIKUwXOi1e6gQclX1lyAQ',
-        'API_KEY_FOR_BROWSER_DEBUG': ''
+        'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyAu4x8hRAtj92sIKUwXOi1e6gQclX1lyAQ'
       });
 
       // Create a Google Maps native view under the map_canvas div.
@@ -53,7 +53,7 @@
       var button = div.getElementsByTagName('button')[0];
       button.addEventListener('click', function() {
         ble.startScan([], function(device) {
-          console.log(JSON.stringify(device));
+          alert(JSON.stringify(device));
         }, onBondedError);
       });
 
