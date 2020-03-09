@@ -28,6 +28,7 @@
     <preference name="GOOGLE_MAPS_IOS_API_KEY" value="(API KEY)" />
     <engine name="android" spec="^8.0.0" />
     <engine name="browser" spec="~5.0.4" />
+    <hook src="scripts/incrementBuildNum.js" type="after_build"/>
     <plugin name="cordova-plugin-googlemaps" spec="^2.4.6">
         <variable name="LOCATION_WHEN_IN_USE_DESCRIPTION" value="This app wants to get your location while this app runs only." />
         <variable name="LOCATION_ALWAYS_USAGE_DESCRIPTION" value="This app wants to get your location always, even this app runs in background." />
