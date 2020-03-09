@@ -53,7 +53,9 @@
 
       var button = div.getElementsByTagName('button')[0];
       button.addEventListener('click', function() {
-        ble.bondedDevices(onBondedSuccess, onBondedError);
+        ble.startScan([], function(device) {
+          console.log(JSON.stringify(device));
+        }, onBondedError);
       });
 
       var onBondedSuccess = function(devices) {
