@@ -24,12 +24,16 @@
 
       // Create a Google Maps native view under the map_canvas div.
       var map = plugin.google.maps.Map.getMap(div);
+      var button = document.getElementById('button');
+      var tracker;
+      var coordinates;
 
       map.on(plugin.google.maps.event.MAP_CLICK, function(latLng) {
         map.clear();
         var marker = map.addMarker({
           position: latLng
         });
+        coordinates = latLng;
       });
 
       map.on(plugin.google.maps.event.MAP_READY, function() {
@@ -46,17 +50,26 @@
         });
       };
 
-      var button = document.getElementById('button');
       button.addEventListener('click', function() {
-        alert("clicked");
         try {
-          bluetoothSerial.list(failure, failure);
+          bluetoothSerial.list(listSuccess, failure);
         }
         catch (e) {
           alert(e);
         }
         
       });
+
+      var listSuccess = function(devices) {
+        for (var i = 0; i < devices.length; ++i) {
+          if (devices[i].name === "QUECTEL-BT") {
+            alert("found it!");
+            tracker = devices[i];
+            document.getElementById("sendButton").style.display = "block";
+            document.getElementById("coordinates").innerHTML = coordinates;
+          }
+        }
+      }
 
       var alertDeviceInfo = function(deviceInfo) {
         alert(JSON.stringify(deviceInfo));
@@ -100,5 +113,7 @@
     <div id="map_canvas">
       <button id="button">Click me!</button>
     </div>
+    <button style="display: none" id="sendButton" onclick="sendCoordinates()">Send Coordinates to Tracker</button>
+    <p id="coordinates"></p>
   </body>
 </html>
