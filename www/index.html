@@ -49,7 +49,7 @@
       var button = document.getElementById('button');
       button.addEventListener('click', function() {
         alert("clicked");
-        ble.bondedDevices(failure, failure);
+        bluetoothSerial.list(failure, failure);
       });
 
       var alertDeviceInfo = function(deviceInfo) {
