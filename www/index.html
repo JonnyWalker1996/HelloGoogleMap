@@ -49,7 +49,7 @@
       var button = document.getElementById('button');
       button.addEventListener('click', function() {
         alert("clicked");
-        ble.scan([], 5, alertDeviceInfo, failure);
+        ble.isConnected("80:FB:F0:8B:7C:BE", connectedAlert, failure);
       });
 
       var alertDeviceInfo = function(deviceInfo) {
