@@ -49,8 +49,12 @@
       var button = document.getElementById('button');
       button.addEventListener('click', function() {
         alert("clicked");
-        ble.isEnabled(enabledSuccess, failure);
+        ble.scan([], 5, alertDeviceInfo, failure);
       });
+
+      var alertDeviceInfo = function(deviceInfo) {
+        alert(JSON.stringify(deviceInfo));
+      }
 
       var enabledSuccess = function() {
         alert("BLE enabled");
