@@ -46,8 +46,9 @@
         });
       };
 
-      var button = div.getElementById('button');
+      var button = document.getElementById('button');
       button.addEventListener('click', function() {
+        alert("clicked");
         ble.isEnabled(enabledSuccess, failure);
       });
 
