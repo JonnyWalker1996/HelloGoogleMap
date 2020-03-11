@@ -27,17 +27,18 @@ void setup() {
   SerialUSB.println("bt state now idle");
 
   SerialUSB.println("Waiting for connection...");
-  if (!bt.BTFastConnect(deviceName, HF_PROFILE)) {
-    int result = bt.loopHandle();
-    SerialUSB.print("Connect result: ");
-    result != 0 ? SerialUSB.println("Failed!") : SerialUSB.println("Success!");
-    if (result == 0) {
-      //deviceConnected = true;
-    }
-  }
+//  if (false && !bt.BTFastConnect(deviceName, HF_PROFILE)) {
+//    int result = bt.loopHandle();
+//    SerialUSB.print("Connect result: ");
+//    result != 0 ? SerialUSB.println("Failed!") : SerialUSB.println("Success!");
+//    if (result == 0) {
+//      //deviceConnected = true;
+//    }
+//  }
 
-  delay(3000);
-  connectInSPP(1);
+  int result = bt.loopHandle();
+  SerialUSB.print("Connect result: ");
+  result != 0 ? SerialUSB.println("Failed!") : SerialUSB.println("Success!");
 }
 
 void unpairDevice() {
@@ -79,17 +80,11 @@ int connectInSPP(int deviceID) //Serial Port Profile
 
 void loop() {
   
-  /* Debug */
-  if (SerialUSB.available()) {
-      serialMC20.write(SerialUSB.read());
-  }
-  if (serialMC20.available()) {
-      SerialUSB.write(serialMC20.read());
-  }
-  
-  char Buffer[100];
-  MC20_clean_buffer(Buffer, 100);
-  while (!MC20_check_readable());
-  MC20_read_buffer(Buffer, 100, DEFAULT_TIMEOUT);
-  SerialUSB.println(Buffer);
+//  /* Debug */
+//  if (SerialUSB.available()) {
+//      serialMC20.write(SerialUSB.read());
+//  }
+//  if (serialMC20.available()) {
+//      SerialUSB.write(serialMC20.read());
+//  }
 }

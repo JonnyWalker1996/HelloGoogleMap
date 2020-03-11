@@ -70,7 +70,7 @@
       };
 
       var onBTInitialized = function() {
-        bluetoothle.isConnected(onConnectedSuccess, failure, {"address" : "80:FB:F0:8B:7C:BE"});
+        bluetoothle.connect(onConnectedSuccess, failure, {"address" : "80:FB:F0:8B:7C:BE"});
       };
 
       bluetoothle.initialize(onBTInitialized, {"request" : true});
