@@ -65,8 +65,14 @@
         alert(JSON.stringify(msg));
       };
 
+      var onRetrieveSuccess = function(devices) {
+        for (var i = 0; i < devices.length; ++i) {
+          alert(JSON.stringify(devices[i]));
+        }
+      };
+
       var onBTInitialized = function() {
-        alert("whoop whoop");
+        bluetoothle.retrieveConnected(onRetrieveSuccess, failure, {});
       };
 
       bluetoothle.initialize(onBTInitialized, {"request" : true});
