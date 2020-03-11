@@ -48,4 +48,18 @@ void unpairDevice() {
 }
 
 void loop() {
+  
+  /* Debug */
+  if (SerialUSB.available()) {
+      serialMC20.write(SerialUSB.read());
+  }
+  if (serialMC20.available()) {
+      SerialUSB.write(serialMC20.read());
+  }
+  
+  char Buffer[100];
+  MC20_clean_buffer(Buffer, 100);
+  while (!MC20_check_readable());
+  MC20_read_buffer(Buffer, 100, DEFAULT_TIMEOUT);
+  SerialUSB.println(Buffer);
 }
