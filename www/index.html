@@ -65,15 +65,12 @@
         alert(JSON.stringify(msg));
       };
 
-      var onScanStarted = function(return1, return2) {
-        alert("scan start success");
-        alert(JSON.stringify(return1));
-        alert(JSON.stringify(return2));
+      var onBondedSuccess = function(isBonded) {
+        alert(JSON.stringify(isBonded));
       };
 
       var onBTInitialized = function() {
-        alert("BT initialized");
-        bluetoothle.startScan(onScanStarted, failure, []);
+        bluetoothle.isBonded(onBondedSuccess, failure, {"address" : "80:FB:F0:8B:7C:BE"});
       };
 
       bluetoothle.initialize(onBTInitialized, {"request" : true});
