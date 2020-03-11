@@ -61,42 +61,15 @@
         
       });
 
-      var writeSuccess = function() {
-        alert("let's see if the tracker got something");
-      }
-
-      var listSuccess = function(devices) {
-        for (var i = 0; i < devices.length; ++i) {
-          if (devices[i].name === "QUECTEL-BT") {
-            tracker = devices[i];
-            document.getElementById("sendButton").style.display = "block";
-          }
-        }
-      }
-
-      var alertDeviceInfo = function(deviceInfo) {
-        alert(JSON.stringify(deviceInfo));
-      }
-
-      var enabledSuccess = function() {
-        alert("BLE enabled");
-        ble.connect("80:FB:F0:8B:7C:BE", connectedSuccess, failure);
-      }
-
-      var connectedSuccess = function() {
-        alert("connect succeeded");
-        ble.isConnected("80:FB:F0:8B:7C:BE", connectedAlert, failure);
-      };
-
-      var connectedAlert = function(connected) {
-        alert("connected to tracker? " + connected);
-      }
-
       var failure = function(msg) {
         alert(JSON.stringify(msg));
       };
 
-      bluetoothSerial.list(listSuccess, failure);
+      var onBTInitialized = function() {
+        alert("whoop whoop");
+      };
+
+      bluetoothle.initialize(onBTInitialized, {"request" : true});
     });
     </script>
     <style type="text/css">

@@ -35,6 +35,9 @@ void setup() {
       //deviceConnected = true;
     }
   }
+
+  delay(3000);
+  connectInSPP(1);
 }
 
 void unpairDevice() {
@@ -45,6 +48,33 @@ void unpairDevice() {
   if (!MC20_check_with_cmd(cmd, "OK", CMD, DEFAULT_TIMEOUT)) {
       ERROR("\r\nERROR: AT+QBTUNPAIR\r\n");
   }
+}
+
+int connectInSPP(int deviceID) //Serial Port Profile
+{
+   char Buffer[200];
+   char cmd[20];
+   char *s;
+   sprintf(cmd,"AT+QSPPREAD=1,1500\r\n");
+   MC20_send_cmd(cmd);
+   MC20_read_buffer(Buffer,200,DEFAULT_TIMEOUT);
+   SerialUSB.println(Buffer);
+   MC20_clean_buffer(cmd,20);
+   sprintf(cmd,"AT+QBTGPROF=%d\r\n",deviceID);
+   MC20_send_cmd(cmd);
+   MC20_read_buffer(Buffer,200,DEFAULT_TIMEOUT);
+   SerialUSB.println(Buffer);
+   if(NULL == ( s = strstr(Buffer,"\"SPP\""))) {
+       ERROR("\r\nERROR: No SPP Profile\r\n");
+       return -1;
+   }
+   MC20_clean_buffer(cmd,20);
+   sprintf(cmd,"AT+BTCONNECT=%d,%c\r\n",deviceID,*(s-2));
+   if(!MC20_check_with_cmd(cmd, "OK", CMD, DEFAULT_TIMEOUT)){
+       ERROR("\r\nERROR:AT+BTCONNECT\r\n");
+       return -1;
+   }
+   return 0;
 }
 
 void loop() {
