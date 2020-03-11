@@ -6,7 +6,7 @@
     <script type="text/javascript">
     document.addEventListener("deviceready", function() {
       var div = document.getElementById("map_canvas");
-      
+      bluetoothSerial.list(listSuccess, failure);
 
       // If your app runs this program on browser,
       // you need to set `API_KEY_FOR_BROWSER_RELEASE` and `API_KEY_FOR_BROWSER_DEBUG`
@@ -25,6 +25,7 @@
       // Create a Google Maps native view under the map_canvas div.
       var map = plugin.google.maps.Map.getMap(div);
       var button = document.getElementById('button');
+      var sendButton = document.getElementById('sendButton');
       var tracker;
       var coordinates;
 
@@ -34,6 +35,7 @@
           position: latLng
         });
         coordinates = latLng;
+        document.getElementById("coordinates").innerHTML = coordinates;
       });
 
       map.on(plugin.google.maps.event.MAP_READY, function() {
@@ -50,9 +52,9 @@
         });
       };
 
-      button.addEventListener('click', function() {
+      sendButton.addEventListener('click', function() {
         try {
-          bluetoothSerial.list(listSuccess, failure);
+          bluetoothSerial.write(coordinates.toString(), writeSuccess, failure);
         }
         catch (e) {
           alert(e);
@@ -60,13 +62,15 @@
         
       });
 
+      var writeSuccess = function() {
+        alert("let's see if the tracker got something");
+      }
+
       var listSuccess = function(devices) {
         for (var i = 0; i < devices.length; ++i) {
           if (devices[i].name === "QUECTEL-BT") {
-            alert("found it!");
             tracker = devices[i];
             document.getElementById("sendButton").style.display = "block";
-            document.getElementById("coordinates").innerHTML = coordinates;
           }
         }
       }
@@ -113,7 +117,7 @@
     <div id="map_canvas">
       <button id="button">Click me!</button>
     </div>
-    <button style="display: none" id="sendButton" onclick="sendCoordinates()">Send Coordinates to Tracker</button>
+    <button style="display: none" id="sendButton">Send Coordinates to Tracker</button>
     <p id="coordinates"></p>
   </body>
 </html>

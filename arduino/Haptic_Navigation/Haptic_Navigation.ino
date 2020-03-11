@@ -27,11 +27,13 @@ void setup() {
   SerialUSB.println("bt state now idle");
 
   SerialUSB.println("Waiting for connection...");
-  int result = bt.loopHandle();
-  SerialUSB.print("Connect result: ");
-  result != 0 ? SerialUSB.println("Failed!") : SerialUSB.println("Success!");
-  if (result == 0) {
-    //deviceConnected = true;
+  if (!bt.BTFastConnect(deviceName, HF_PROFILE)) {
+    int result = bt.loopHandle();
+    SerialUSB.print("Connect result: ");
+    result != 0 ? SerialUSB.println("Failed!") : SerialUSB.println("Success!");
+    if (result == 0) {
+      //deviceConnected = true;
+    }
   }
 }
 
