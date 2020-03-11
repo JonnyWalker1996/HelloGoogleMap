@@ -65,14 +65,15 @@
         alert(JSON.stringify(msg));
       };
 
-      var onDiscoverSuccess = function(device) {
-        alert("discover success");
-        alert(JSON.stringify(device));
+      var onScanStarted = function(return1, return2) {
+        alert("scan start success");
+        alert(JSON.stringify(return1));
+        alert(JSON.stringify(return2));
       };
 
       var onBTInitialized = function() {
         alert("BT initialized");
-        bluetoothle.discover(onDiscoverSuccess, failure, {"address" : "98:09:CF:99:C5:71"});
+        bluetoothle.startScan(onScanStarted, failure, []);
       };
 
       bluetoothle.initialize(onBTInitialized, {"request" : true});
