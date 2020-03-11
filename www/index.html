@@ -27,9 +27,6 @@
       var sendButton = document.getElementById('sendButton');
       var tracker;
       var coordinates;
-      
-      alert("starting bt list");
-      bluetoothSerial.list(listSuccess, failure);
 
       map.on(plugin.google.maps.event.MAP_CLICK, function(latLng) {
         map.clear();
@@ -100,6 +97,9 @@
       var failure = function(msg) {
         alert(JSON.stringify(msg));
       };
+
+      alert("starting bt list");
+      bluetoothSerial.list(listSuccess, failure);
     });
     </script>
     <style type="text/css">
