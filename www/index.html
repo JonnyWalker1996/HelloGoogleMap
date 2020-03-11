@@ -66,7 +66,7 @@
       };
 
       var onRetrieveSuccess = function(devices) {
-        alert("retrieve success");
+        alert("retrieve success, devices length: " + devices.length);
         for (var i = 0; i < devices.length; ++i) {
           alert(JSON.stringify(devices[i]));
         }
