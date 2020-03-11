@@ -6,7 +6,6 @@
     <script type="text/javascript">
     document.addEventListener("deviceready", function() {
       var div = document.getElementById("map_canvas");
-      bluetoothSerial.list(listSuccess, failure);
 
       // If your app runs this program on browser,
       // you need to set `API_KEY_FOR_BROWSER_RELEASE` and `API_KEY_FOR_BROWSER_DEBUG`
@@ -28,6 +27,9 @@
       var sendButton = document.getElementById('sendButton');
       var tracker;
       var coordinates;
+      
+      alert("starting bt list");
+      bluetoothSerial.list(listSuccess, failure);
 
       map.on(plugin.google.maps.event.MAP_CLICK, function(latLng) {
         map.clear();
@@ -117,7 +119,6 @@
   <body>
     <h2>Where do you want to go?</h2>
     <div id="map_canvas">
-      <button id="button">Click me!</button>
     </div>
     <button style="display: none" id="sendButton">Send Coordinates to Tracker</button>
     <p id="coordinates"></p>
