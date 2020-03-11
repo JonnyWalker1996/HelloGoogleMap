@@ -65,12 +65,12 @@
         alert(JSON.stringify(msg));
       };
 
-      var onBondedSuccess = function(isBonded) {
-        alert(JSON.stringify(isBonded));
+      var onConnectedSuccess = function(isConnected) {
+        alert(JSON.stringify(isConnected));
       };
 
       var onBTInitialized = function() {
-        bluetoothle.isBonded(onBondedSuccess, failure, {"address" : "80:FB:F0:8B:7C:BE"});
+        bluetoothle.isConnected(onConnectedSuccess, failure, {"address" : "80:FB:F0:8B:7C:BE"});
       };
 
       bluetoothle.initialize(onBTInitialized, {"request" : true});
