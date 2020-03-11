@@ -67,8 +67,10 @@
       }
 
       var listSuccess = function(devices) {
+        alert("looking for tracker in paired devices...");
         for (var i = 0; i < devices.length; ++i) {
           if (devices[i].name === "QUECTEL-BT") {
+            alert("found it!");
             tracker = devices[i];
             document.getElementById("sendButton").style.display = "block";
           }
