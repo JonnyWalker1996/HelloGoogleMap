@@ -65,12 +65,12 @@
         alert(JSON.stringify(msg));
       };
 
-      var onDiscoverSuccess = function(stuff) {
+      var onStartScanSuccess = function(stuff) {
         alert(JSON.stringify(stuff));
       };
 
       var onBTInitialized = function() {
-        bluetoothle.discover(onDiscoverSuccess, failure, {"address" : "02:00:00:00:00:00"});
+        bluetoothle.startScan(onStartScanSuccess, failure, {});
       };
 
       bluetoothle.initialize(onBTInitialized, {"request" : true});

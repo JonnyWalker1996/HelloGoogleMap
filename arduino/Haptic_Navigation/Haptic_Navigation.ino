@@ -26,6 +26,8 @@ void setup() {
 
   SerialUSB.println("bt state now idle");
 
+  unpairDevice();
+
   SerialUSB.println("Waiting for connection...");
 //  if (false && !bt.BTFastConnect(deviceName, HF_PROFILE)) {
 //    int result = bt.loopHandle();
